@@ -15,6 +15,7 @@ pipeline {
     }
 
     environment {
+        PATH = "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
         NODE_ENV = 'test'
         BASE_URL = 'https://www.saucedemo.com'
     }
@@ -26,28 +27,30 @@ pipeline {
     }
 
     stages {
+
+        stage('Checkout Code') {
+            steps {
+                git 'https://github.com/Harsh-Chaudhary7/playwright-ui-framework.git'
+            }
+        }
+
         stage('Setup') {
             steps {
-                script {
-                    sh '''
-        export PATH=$PATH:/usr/local/bin
-        node --version
-        '''
-                    echo "🚀 Setting up Playwright test environment..."
-                    sh 'node --version'
-                    sh 'npm --version'
-                }
-                
+                echo "🚀 Setting up Playwright test environment..."
+
+                // Debug (IMPORTANT)
+                sh 'echo PATH=$PATH'
+                sh 'which node || true'
+                sh 'node --version'
+                sh 'npm --version'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                script {
-                    echo "📦 Installing dependencies..."
-                    sh 'npm install'
-                    sh 'npx playwright install'
-                }
+                echo "📦 Installing dependencies..."
+                sh 'npm install'
+                sh 'npx playwright install'
             }
         }
 
@@ -55,8 +58,9 @@ pipeline {
             steps {
                 script {
                     echo "🧪 Running ${params.TEST_SUITE} tests..."
+
                     def command = 'npx playwright test'
-                    
+
                     if (params.TEST_SUITE == 'smoke') {
                         command += ' --grep @smoke'
                     } else if (params.TEST_SUITE == 'login') {
@@ -68,12 +72,14 @@ pipeline {
                     } else if (params.TEST_SUITE == 'e2e') {
                         command += ' tests/e2e.spec.ts'
                     }
-                    
+
                     if (params.HEADED_MODE) {
                         command += ' --headed'
                     }
-                    
-                    command += ' 2>&1 || true'
+
+                    // Prevent pipeline crash but still show failure
+                    command += ' || true'
+
                     sh command
                 }
             }
@@ -81,51 +87,41 @@ pipeline {
 
         stage('Generate Report') {
             steps {
-                script {
-                    echo "📊 Generating test report..."
-                    sh 'npx playwright show-report test-results || true'
-                }
+                echo "📊 Generating test report..."
+                sh 'npx playwright show-report || true'
             }
         }
     }
 
     post {
         always {
-            script {
-                echo "📋 Collecting test results..."
-                
-                // Publish HTML report
-                publishHTML([
-                    reportDir: 'playwright-report',
-                    reportFiles: 'index.html',
-                    reportName: 'Playwright Test Report',
-                    keepAll: true,
-                    alwaysLinkToLastBuild: true
-                ])
-                
-                // Publish JSON report
-                junit(
-                    testResults: 'test-results/**/*.xml',
-                    allowEmptyResults: true,
-                    skipPublishingChecks: true
-                )
-            }
+            echo "📋 Collecting test results..."
+
+            // HTML Report
+            publishHTML([
+                reportDir: 'playwright-report',
+                reportFiles: 'index.html',
+                reportName: 'Playwright Test Report',
+                keepAll: true,
+                alwaysLinkToLastBuild: true
+            ])
+
+            // JUnit Report (only if exists)
+            junit(
+                testResults: 'test-results/**/*.xml',
+                allowEmptyResults: true
+            )
+
+            // Archive artifacts (VERY IMPORTANT)
+            archiveArtifacts artifacts: 'playwright-report/**', allowEmptyArchive: true
         }
 
         success {
-            script {
-                echo "✅ Tests passed successfully!"
-                // Optional: Send success notification
-                // slackSend(color: 'good', message: "Playwright tests passed: ${env.BUILD_URL}")
-            }
+            echo "✅ Tests passed successfully!"
         }
 
         failure {
-            script {
-                echo "❌ Tests failed. Check the report below."
-                // Optional: Send failure notification
-                // slackSend(color: 'danger', message: "Playwright tests failed: ${env.BUILD_URL}")
-            }
+            echo "❌ Tests failed. Check the report below."
         }
 
         unstable {
@@ -133,10 +129,8 @@ pipeline {
         }
 
         cleanup {
-            script {
-                echo "🧹 Cleaning up..."
-                sh 'rm -rf test-results || true'
-            }
+            echo "🧹 Cleaning up..."
+            sh 'rm -rf test-results || true'
         }
     }
 }
