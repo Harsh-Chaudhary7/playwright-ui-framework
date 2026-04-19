@@ -29,10 +29,15 @@ pipeline {
         stage('Setup') {
             steps {
                 script {
+                    sh '''
+        export PATH=$PATH:/usr/local/bin
+        node --version
+        '''
                     echo "🚀 Setting up Playwright test environment..."
                     sh 'node --version'
                     sh 'npm --version'
                 }
+                
             }
         }
 
