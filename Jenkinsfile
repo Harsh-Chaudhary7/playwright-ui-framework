@@ -42,7 +42,7 @@ pipeline {
 
         stage('Setup') {
             steps {
-                echo "🚀 Setting up Playwright environment..."
+                echo "🚀 Setting up environment..."
                 sh 'node --version'
                 sh 'npm --version'
             }
@@ -73,6 +73,7 @@ pipeline {
                         command += ' --headed'
                     }
 
+                    // Let Jenkins fail if tests fail (correct behavior)
                     sh command
                 }
             }
@@ -89,27 +90,31 @@ pipeline {
         always {
             echo "📋 Collecting test results..."
 
+            // ❗ DO NOT rely only on publishHTML (can render blank)
+            // Keep it optional
             script {
                 if (fileExists('playwright-report/index.html')) {
                     publishHTML([
                         reportDir: 'playwright-report',
                         reportFiles: 'index.html',
-                        reportName: 'Playwright Test Report',
+                        reportName: 'Playwright Report',
                         keepAll: true,
                         alwaysLinkToLastBuild: true,
                         allowMissing: true
                     ])
                 } else {
-                    echo "⚠️ Report not found"
+                    echo "⚠️ HTML report not found"
                 }
             }
 
+            // ✅ REQUIRED → This is the reliable way
+            archiveArtifacts artifacts: 'playwright-report/**', allowEmptyArchive: true
+
+            // ✅ JUnit (only if configured in Playwright)
             junit(
                 testResults: 'test-results/results.xml',
                 allowEmptyResults: true
             )
-
-            archiveArtifacts artifacts: 'playwright-report/**', allowEmptyArchive: true
         }
 
         success {
@@ -117,7 +122,7 @@ pipeline {
         }
 
         failure {
-            echo "❌ Tests failed. Check the report."
+            echo "❌ Tests failed. Check report under Artifacts."
         }
 
         unstable {
