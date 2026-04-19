@@ -28,17 +28,21 @@ pipeline {
 
     stages {
 
+        stage('Clean Workspace') {
+            steps {
+                deleteDir()
+            }
+        }
+
         stage('Checkout Code') {
             steps {
-        git branch: 'main', url: 'https://github.com/Harsh-Chaudhary7/playwright-ui-framework.git'
-    }
+                git branch: 'main', url: 'https://github.com/Harsh-Chaudhary7/playwright-ui-framework.git'
+            }
         }
 
         stage('Setup') {
             steps {
                 echo "🚀 Setting up Playwright test environment..."
-
-                // Debug (IMPORTANT)
                 sh 'echo PATH=$PATH'
                 sh 'which node || true'
                 sh 'node --version'
@@ -77,7 +81,7 @@ pipeline {
                         command += ' --headed'
                     }
 
-                    // Prevent pipeline crash but still show failure
+                    // TEMP: keep for now, remove later
                     command += ' || true'
 
                     sh command
@@ -97,29 +101,26 @@ pipeline {
         always {
             echo "📋 Collecting test results..."
 
-            // HTML Report
             script {
-    if (fileExists('playwright-report/index.html')) {
-        publishHTML([
-            reportDir: 'playwright-report',
-            reportFiles: 'index.html',
-            reportName: 'Playwright Test Report',
-            keepAll: true,
-            alwaysLinkToLastBuild: true,
-            allowMissing: true
-        ])
-    } else {
-        echo "⚠️ Report not found, skipping publishHTML"
-    }
-}
+                if (fileExists('playwright-report/index.html')) {
+                    publishHTML([
+                        reportDir: 'playwright-report',
+                        reportFiles: 'index.html',
+                        reportName: 'Playwright Test Report',
+                        keepAll: true,
+                        alwaysLinkToLastBuild: true,
+                        allowMissing: true
+                    ])
+                } else {
+                    echo "⚠️ Report not found, skipping publishHTML"
+                }
+            }
 
-            // JUnit Report (only if exists)
             junit(
                 testResults: 'test-results/**/*.xml',
                 allowEmptyResults: true
             )
 
-            // Archive artifacts (VERY IMPORTANT)
             archiveArtifacts artifacts: 'playwright-report/**', allowEmptyArchive: true
         }
 
