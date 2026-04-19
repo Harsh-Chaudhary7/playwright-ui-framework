@@ -10,7 +10,7 @@ pipeline {
         booleanParam(
             name: 'HEADED_MODE',
             defaultValue: false,
-            description: 'Run tests in headed mode (visible browser)'
+            description: 'Run tests in headed mode'
         )
     }
 
@@ -42,9 +42,7 @@ pipeline {
 
         stage('Setup') {
             steps {
-                echo "🚀 Setting up Playwright test environment..."
-                sh 'echo PATH=$PATH'
-                sh 'which node || true'
+                echo "🚀 Setting up Playwright environment..."
                 sh 'node --version'
                 sh 'npm --version'
             }
@@ -67,32 +65,22 @@ pipeline {
 
                     if (params.TEST_SUITE == 'smoke') {
                         command += ' --grep @smoke'
-                    } else if (params.TEST_SUITE == 'login') {
-                        command += ' tests/login.spec.ts'
-                    } else if (params.TEST_SUITE == 'inventory') {
-                        command += ' tests/inventory.spec.ts'
-                    } else if (params.TEST_SUITE == 'checkout') {
-                        command += ' tests/checkout.spec.ts'
-                    } else if (params.TEST_SUITE == 'e2e') {
-                        command += ' tests/e2e.spec.ts'
+                    } else if (params.TEST_SUITE != 'all') {
+                        command += " tests/${params.TEST_SUITE}.spec.ts"
                     }
 
                     if (params.HEADED_MODE) {
                         command += ' --headed'
                     }
 
-                    // TEMP: keep for now, remove later
-                    command += ' || true'
-
                     sh command
                 }
             }
         }
 
-        stage('Generate Report') {
+        stage('Report Info') {
             steps {
-                echo "📊 Generating test report..."
-                sh 'npx playwright show-report || true'
+                echo "📊 Playwright report generated in playwright-report/"
             }
         }
     }
@@ -112,12 +100,12 @@ pipeline {
                         allowMissing: true
                     ])
                 } else {
-                    echo "⚠️ Report not found, skipping publishHTML"
+                    echo "⚠️ Report not found"
                 }
             }
 
             junit(
-                testResults: 'test-results/**/*.xml',
+                testResults: 'test-results/results.xml',
                 allowEmptyResults: true
             )
 
@@ -129,7 +117,7 @@ pipeline {
         }
 
         failure {
-            echo "❌ Tests failed. Check the report below."
+            echo "❌ Tests failed. Check the report."
         }
 
         unstable {
