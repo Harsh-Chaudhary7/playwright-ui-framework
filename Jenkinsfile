@@ -98,13 +98,20 @@ pipeline {
             echo "📋 Collecting test results..."
 
             // HTML Report
-            publishHTML([
-                reportDir: 'playwright-report',
-                reportFiles: 'index.html',
-                reportName: 'Playwright Test Report',
-                keepAll: true,
-                alwaysLinkToLastBuild: true
-            ])
+            script {
+    if (fileExists('playwright-report/index.html')) {
+        publishHTML([
+            reportDir: 'playwright-report',
+            reportFiles: 'index.html',
+            reportName: 'Playwright Test Report',
+            keepAll: true,
+            alwaysLinkToLastBuild: true,
+            allowMissing: true
+        ])
+    } else {
+        echo "⚠️ Report not found, skipping publishHTML"
+    }
+}
 
             // JUnit Report (only if exists)
             junit(
