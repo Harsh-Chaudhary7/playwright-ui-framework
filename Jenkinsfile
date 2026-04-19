@@ -30,8 +30,8 @@ pipeline {
 
         stage('Checkout Code') {
             steps {
-                git 'https://github.com/Harsh-Chaudhary7/playwright-ui-framework.git'
-            }
+        git branch: 'main', url: 'https://github.com/Harsh-Chaudhary7/playwright-ui-framework.git'
+    }
         }
 
         stage('Setup') {
