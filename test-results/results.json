@@ -1,0 +1,517 @@
+{
+  "config": {
+    "configFile": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/playwright.config.ts",
+    "rootDir": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/tests",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/tests/global.setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/test-results",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "html",
+        {
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.59.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "checkout.spec.ts",
+      "file": "checkout.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Checkout Page Tests",
+          "file": "checkout.spec.ts",
+          "line": 7,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Complete checkout with valid data",
+              "ok": true,
+              "tags": [
+                "checkout",
+                "smoke",
+                "positive"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "testID",
+                      "description": "CHECKOUT_001",
+                      "location": {
+                        "file": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/tests/checkout.spec.ts",
+                        "line": 50,
+                        "column": 3
+                      }
+                    },
+                    {
+                      "type": "severity",
+                      "description": "critical",
+                      "location": {
+                        "file": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/tests/checkout.spec.ts",
+                        "line": 50,
+                        "column": 3
+                      }
+                    },
+                    {
+                      "type": "author",
+                      "description": "QA Team",
+                      "location": {
+                        "file": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/tests/checkout.spec.ts",
+                        "line": 50,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 13863,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-19T00:20:27.165Z",
+                      "annotations": [
+                        {
+                          "type": "testID",
+                          "description": "CHECKOUT_001",
+                          "location": {
+                            "file": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/tests/checkout.spec.ts",
+                            "line": 50,
+                            "column": 3
+                          }
+                        },
+                        {
+                          "type": "severity",
+                          "description": "critical",
+                          "location": {
+                            "file": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/tests/checkout.spec.ts",
+                            "line": 50,
+                            "column": 3
+                          }
+                        },
+                        {
+                          "type": "author",
+                          "description": "QA Team",
+                          "location": {
+                            "file": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/tests/checkout.spec.ts",
+                            "line": 50,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "25ab1bfc84c57e3e3a45-3ce9934c580dd4c58826",
+              "file": "checkout.spec.ts",
+              "line": 50,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "e2e.spec.ts",
+      "file": "e2e.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "E2E Tests - Complete User Flow",
+          "file": "e2e.spec.ts",
+          "line": 7,
+          "column": 6,
+          "specs": [
+            {
+              "title": "E2E: Login → Add to Cart → Checkout",
+              "ok": true,
+              "tags": [
+                "e2e",
+                "smoke",
+                "critical"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "testID",
+                      "description": "E2E_001",
+                      "location": {
+                        "file": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/tests/e2e.spec.ts",
+                        "line": 19,
+                        "column": 3
+                      }
+                    },
+                    {
+                      "type": "severity",
+                      "description": "critical",
+                      "location": {
+                        "file": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/tests/e2e.spec.ts",
+                        "line": 19,
+                        "column": 3
+                      }
+                    },
+                    {
+                      "type": "author",
+                      "description": "QA Team",
+                      "location": {
+                        "file": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/tests/e2e.spec.ts",
+                        "line": 19,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3484,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-19T00:20:42.071Z",
+                      "annotations": [
+                        {
+                          "type": "testID",
+                          "description": "E2E_001",
+                          "location": {
+                            "file": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/tests/e2e.spec.ts",
+                            "line": 19,
+                            "column": 3
+                          }
+                        },
+                        {
+                          "type": "severity",
+                          "description": "critical",
+                          "location": {
+                            "file": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/tests/e2e.spec.ts",
+                            "line": 19,
+                            "column": 3
+                          }
+                        },
+                        {
+                          "type": "author",
+                          "description": "QA Team",
+                          "location": {
+                            "file": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/tests/e2e.spec.ts",
+                            "line": 19,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b1c7859d981cc20c96be-984ef1546de5667ad4d0",
+              "file": "e2e.spec.ts",
+              "line": 19,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "inventory.spec.ts",
+      "file": "inventory.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Inventory Page Tests",
+          "file": "inventory.spec.ts",
+          "line": 6,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Add first item to cart",
+              "ok": true,
+              "tags": [
+                "inventory",
+                "smoke",
+                "positive"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "testID",
+                      "description": "INVENTORY_001",
+                      "location": {
+                        "file": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/tests/inventory.spec.ts",
+                        "line": 28,
+                        "column": 3
+                      }
+                    },
+                    {
+                      "type": "severity",
+                      "description": "critical",
+                      "location": {
+                        "file": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/tests/inventory.spec.ts",
+                        "line": 28,
+                        "column": 3
+                      }
+                    },
+                    {
+                      "type": "author",
+                      "description": "QA Team",
+                      "location": {
+                        "file": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/tests/inventory.spec.ts",
+                        "line": 28,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1019,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-19T00:20:45.576Z",
+                      "annotations": [
+                        {
+                          "type": "testID",
+                          "description": "INVENTORY_001",
+                          "location": {
+                            "file": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/tests/inventory.spec.ts",
+                            "line": 28,
+                            "column": 3
+                          }
+                        },
+                        {
+                          "type": "severity",
+                          "description": "critical",
+                          "location": {
+                            "file": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/tests/inventory.spec.ts",
+                            "line": 28,
+                            "column": 3
+                          }
+                        },
+                        {
+                          "type": "author",
+                          "description": "QA Team",
+                          "location": {
+                            "file": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/tests/inventory.spec.ts",
+                            "line": 28,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "491382254a121adeeb47-16713fee2f64b8d9e495",
+              "file": "inventory.spec.ts",
+              "line": 28,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "login.spec.ts",
+      "file": "login.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Login Page Tests",
+          "file": "login.spec.ts",
+          "line": 5,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Login with valid credentials",
+              "ok": true,
+              "tags": [
+                "login",
+                "smoke",
+                "positive"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "testID",
+                      "description": "LOGIN_001",
+                      "location": {
+                        "file": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/tests/login.spec.ts",
+                        "line": 19,
+                        "column": 3
+                      }
+                    },
+                    {
+                      "type": "severity",
+                      "description": "critical",
+                      "location": {
+                        "file": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/tests/login.spec.ts",
+                        "line": 19,
+                        "column": 3
+                      }
+                    },
+                    {
+                      "type": "author",
+                      "description": "QA Team",
+                      "location": {
+                        "file": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/tests/login.spec.ts",
+                        "line": 19,
+                        "column": 3
+                      }
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1004,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-19T00:20:46.614Z",
+                      "annotations": [
+                        {
+                          "type": "testID",
+                          "description": "LOGIN_001",
+                          "location": {
+                            "file": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/tests/login.spec.ts",
+                            "line": 19,
+                            "column": 3
+                          }
+                        },
+                        {
+                          "type": "severity",
+                          "description": "critical",
+                          "location": {
+                            "file": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/tests/login.spec.ts",
+                            "line": 19,
+                            "column": 3
+                          }
+                        },
+                        {
+                          "type": "author",
+                          "description": "QA Team",
+                          "location": {
+                            "file": "/Users/leo/Documents/UI Automation Framework (Playwright) + Real User Flows/playwright-ui-framework/tests/login.spec.ts",
+                            "line": 19,
+                            "column": 3
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-9f11095a54023dd7ba6f",
+              "file": "login.spec.ts",
+              "line": 19,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-04-19T00:20:26.626Z",
+    "duration": 21137.094999999998,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

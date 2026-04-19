@@ -1,0 +1,4 @@
+{
+  "firstItemButton": "[data-test='add-to-cart-sauce-labs-backpack']",
+  "cartLink": "[data-test='shopping-cart-link']"
+}
